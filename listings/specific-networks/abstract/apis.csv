@@ -1,4 +1,5 @@
 slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,technology,chain,accessPrice,queryPrice,starred,trial,availableApis,limitations,securityImprovements,monitoringAndAnalytics,regions,additionalFeatures,address,tag,uptimeSla,blocksBehindSla,bandwidthSla,supportSla
+alchemy-enterprise-recent-state-mainnet,,!offer:alchemy-enterprise-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 alchemy-mainnet-free-recent-state,,!offer:alchemy-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 drpc-mainnet-free-recent-state,,!offer:drpc-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 quicknode-mainnet-build-recent-state,,!offer:quicknode-build-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
