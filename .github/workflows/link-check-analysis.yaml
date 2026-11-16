@@ -150,6 +150,7 @@ jobs:
           failIfEmpty: false
           args: >
             --extensions csv
+            --exclude-all-private
             --method GET
             --accept 200,202,204,400,401,403,405,429
             --timeout 15
