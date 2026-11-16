@@ -53,7 +53,7 @@ def invoke(url, exclude, tempdir):
            "--method", "GET", "--timeout", "5", "--max-retries", "0"]
     if exclude:
         cmd.append("--exclude-all-private")
-    Path(tempdir, "probe.csv").write_text(url + "\\n", encoding="utf-8")
+    Path(tempdir, "probe.csv").write_text(url + "\n", encoding="utf-8")
     cmd.extend(["--extensions", "csv", "."])
     p = subprocess.run(cmd, cwd=tempdir, capture_output=True, text=True,
                        env=env, timeout=30)
