@@ -2,7 +2,7 @@
   "issue": 4065,
   "base": "PR #5364 1RPC scoped migration",
   "policy": "This is a conservative candidate whitelist of provider networks based on public vendor references. A network pair is emitted ONLY if the catalog already contains a specific EVM JSON-RPC offer from the same provider on that exact chain. This does not prove archive or enterprise contract availability. Missing evidence MUST NOT be inferred as support.",
-  "reviewStatus": "in-progress; not independently approved for merge",
+  "reviewStatus": "candidate migration prepared on work branch; NOT applied to open PR #5364; full CSV conversion validation not run",
   "providers": {
     "Alchemy": {
       "url": "https://www.alchemy.com/docs/reference/node-supported-chains",
@@ -145,5 +145,12 @@
       "networks": "ethereum bsc polygon",
       "confidence": "documented provider support only"
     }
-  }
+  },
+  "unverifiedOffers": [
+    "crypto-apis-enterprise-full-archive",
+    "crypto-apis-enterprise-recent-state",
+    "rpcfast-enterprise-full-archive",
+    "sentio-enterprise-full-archive"
+  ],
+  "note": "Unverified global offers are removed in candidate data, but not reintroduced on any network until product-specific endpoint evidence exists. Full export QA and maintainer review required."
 }

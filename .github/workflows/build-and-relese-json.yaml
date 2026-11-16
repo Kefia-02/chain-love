@@ -52,6 +52,9 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r json-tools/tools/requirements.txt
       
+      - name: Reject unscoped EVM JSON-RPC listings
+        run: python3 .github/scripts/check-global-api-scope.py
+
       - name: Run full pipeline
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

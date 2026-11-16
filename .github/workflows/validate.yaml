@@ -42,6 +42,10 @@ jobs:
           cp -r json-tools/meta .
           ls -l
       
+      - name: Reject unscoped EVM JSON-RPC listings
+        run: |
+          python3 -m unittest discover -s .github/tests -p 'test_global_rpc_scope.py' -v
+          python3 .github/scripts/check-global-api-scope.py
       - name: Run scripts inside network-disabled container
         run: |
           docker run --rm \
