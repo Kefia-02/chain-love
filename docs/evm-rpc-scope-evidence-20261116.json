@@ -36,8 +36,8 @@
     },
     "BlockVision": {
       "url": "https://docs.blockvision.org/reference/welcome-to-blockvision",
-      "networks": "ethereum bsc monad",
-      "confidence": "rpc-product"
+      "networks": "ethereum bsc",
+      "confidence": "first-party RPC docs state Ethereum and BNB and historical data; enterprise plan not directly observed"
     },
     "Crypto APIs": {
       "url": "https://cryptoapis.io/",
@@ -55,9 +55,9 @@
       "confidence": "network-doc"
     },
     "Ginco": {
-      "url": "https://ginco.com/ja/supported-chains",
-      "networks": "",
-      "confidence": "chain support not enough to verify EVM JSON-RPC service"
+      "url": "https://ginco.com/nodes",
+      "networks": "ethereum",
+      "confidence": "Ginco node API confirmed; Ethereum from official supported chains"
     },
     "InfStones": {
       "url": "https://infstones.com/terms/terms-and-conditions",
@@ -131,14 +131,14 @@
       "confidence": "EVM RPC product; documented 2500+ generic, per-chain existing listing required"
     },
     "Uniblock": {
-      "url": "https://chains.uniblock.dev/",
-      "networks": "",
-      "confidence": "chainlist is not proof of matching enterprise RPC product"
+      "url": "https://uniblock.dev/",
+      "networks": "ethereum bsc polygon avalanche fantom",
+      "confidence": "first-party RPC traffic and EVM chainlist; enterprise custom plan not directly observed"
     },
     "Validation Cloud": {
-      "url": "https://www.validationcloud.io/network",
-      "networks": "ethereum arbitrum avalanche base berachain bsc core cronos hyperliquid ink linea mantle merlin metis monad opbnb optimism polygon ronin rootstock sonic taiko tempo unichain x-layer zircuit zksync apechain plume somnia",
-      "confidence": "supported network directory; RPC service must match"
+      "url": "https://www.validationcloud.io/post/archive-nodes-powering-web3-data-access-and-historical-analysis",
+      "networks": "ethereum",
+      "confidence": "Ethereum archive node explicitly confirmed by first party"
     },
     "WatchData": {
       "url": "https://docs.watchdata.io/",
