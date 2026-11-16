@@ -1,0 +1,149 @@
+{
+  "issue": 4065,
+  "base": "PR #5364 1RPC scoped migration",
+  "policy": "This is a conservative candidate whitelist of provider networks based on public vendor references. A network pair is emitted ONLY if the catalog already contains a specific EVM JSON-RPC offer from the same provider on that exact chain. This does not prove archive or enterprise contract availability. Missing evidence MUST NOT be inferred as support.",
+  "reviewStatus": "in-progress; not independently approved for merge",
+  "providers": {
+    "Alchemy": {
+      "url": "https://www.alchemy.com/docs/reference/node-supported-chains",
+      "networks": "ethereum polygon optimism arbitrum base zksync zetachain sonic linea mantle monad celo berachain flow zora ronin plasma bob megaeth rootstock tempo hyperliquid lens ink avalanche gnosis bsc boba unichain mode apechain metis scroll opbnb abstract soneium sei story",
+      "confidence": "network-doc"
+    },
+    "AllThatNode": {
+      "url": "https://docs.allthatnode.com/docs/model-context-protocol",
+      "networks": "ethereum arbitrum optimism base polygon bsc avalanche",
+      "confidence": "network-doc"
+    },
+    "Ankr": {
+      "url": "https://www.ankr.com/docs/rpc-service/chains/chains-list/",
+      "networks": "ethereum bsc polygon base arbitrum flare celo avalanche xdc zksync x-layer kaia taiko core optimism gnosis kava telos linea scroll monad fantom mantle sonic metis story somnia sei etherlink plasma",
+      "confidence": "network-doc"
+    },
+    "Blockdaemon": {
+      "url": "https://docs.blockdaemon.com/reference/rpc-api-overview",
+      "networks": "ethereum arbitrum avalanche base hyperliquid ink optimism polygon soneium tempo x-layer",
+      "confidence": "rpc-doc"
+    },
+    "BlockEden": {
+      "url": "https://blockeden.xyz/docs/intro/",
+      "networks": "ethereum",
+      "confidence": "network-guide"
+    },
+    "BlockPi": {
+      "url": "https://public.blockpi.io/",
+      "networks": "ethereum base zetachain merlin",
+      "confidence": "rpc-endpoint"
+    },
+    "BlockVision": {
+      "url": "https://docs.blockvision.org/reference/welcome-to-blockvision",
+      "networks": "ethereum bsc monad",
+      "confidence": "rpc-product"
+    },
+    "Crypto APIs": {
+      "url": "https://cryptoapis.io/",
+      "networks": "",
+      "confidence": "RPC advertised as request-access; no chain-specific RPC assertion"
+    },
+    "dRPC": {
+      "url": "https://drpc.org/docs/pricing/compute-units",
+      "networks": "ethereum polygon optimism base bsc arbitrum",
+      "confidence": "rpc-doc"
+    },
+    "Dwellir": {
+      "url": "https://www.dwellir.com/docs",
+      "networks": "ethereum arbitrum avalanche base polygon bsc taiko etherlink plasma hyperliquid berachain celo cronos fantom gnosis ink immutable manta mantle ronin scroll sonic unichain zksync zora astar metis optimism opbnb world-chain lisk blast flow x-layer",
+      "confidence": "network-doc"
+    },
+    "Ginco": {
+      "url": "https://ginco.com/ja/supported-chains",
+      "networks": "",
+      "confidence": "chain support not enough to verify EVM JSON-RPC service"
+    },
+    "InfStones": {
+      "url": "https://infstones.com/terms/terms-and-conditions",
+      "networks": "ethereum bsc",
+      "confidence": "MCP-supported RPC network; plan unconfirmed"
+    },
+    "Infura": {
+      "url": "https://docs.infura.io/get-started/endpoints/",
+      "networks": "ethereum",
+      "confidence": "rpc-known; broader Gas API list is not RPC-specific"
+    },
+    "NodeReal": {
+      "url": "https://docs.nodereal.io/docs/intro-nodereal",
+      "networks": "bsc opbnb",
+      "confidence": "provider RPC known; expansion not verified"
+    },
+    "Nodit": {
+      "url": "https://developer.nodit.io/en/chains/supported-chains/",
+      "networks": "arbitrum avalanche base bsc ethereum kaia optimism polygon",
+      "confidence": "rpc-node-doc"
+    },
+    "Omnia": {
+      "url": "https://docs.omniatech.io/rpc-api-docs/chains",
+      "networks": "ethereum avalanche bsc polygon arbitrum aurora optimism fantom gnosis base mantle scroll cronos unichain sonic hyperliquid celo kava zircuit berachain ink manta",
+      "confidence": "rpc-doc"
+    },
+    "OnFinality": {
+      "url": "https://onfinality.io/en/networks",
+      "networks": "hyperliquid unichain abstract",
+      "confidence": "rpc-endpoint"
+    },
+    "RadiumBlock": {
+      "url": "https://radiumblock.com/pricing.html",
+      "networks": "ethereum bsc polygon",
+      "confidence": "network-doc"
+    },
+    "RPCFast": {
+      "url": "https://docs.rpcfast.com/rpc-fast-saas-evm/pricing-and-plans.md",
+      "networks": "ethereum base polygon bsc arbitrum",
+      "confidence": "EVM RPC plan docs; enterprise plan unconfirmed"
+    },
+    "Sentio": {
+      "url": "https://docs.sentio.xyz/docs/readme",
+      "networks": "",
+      "confidence": "raw EVM RPC product not source-verified"
+    },
+    "Spectrum": {
+      "url": "https://spectrumnodes.com/docs/api-reference",
+      "networks": "ethereum polygon bsc optimism base avalanche arbitrum gnosis linea hyperliquid berachain monad scroll plasma x-layer",
+      "confidence": "explicit EVM type in official network list"
+    },
+    "SpeedyNodes": {
+      "url": "https://docs.speedynodes.com/networks/overview/",
+      "networks": "ethereum bsc polygon base arbitrum optimism avalanche fantom cronos sonic linea unichain blast abstract",
+      "archiveNetworks": "ethereum bsc polygon base",
+      "confidence": "rpc endpoint list plus archive list"
+    },
+    "Tatum": {
+      "url": "https://docs.tatum.io/docs/supported-blockchains",
+      "networks": "ethereum arbitrum avalanche base bsc celo optimism polygon zksync berachain cronos fantom kaia monad sonic unichain gnosis hyperliquid megaeth plasma plume ronin rootstock x-layer abstract aurora etherlink sei xdc",
+      "confidence": "node support, per-product archive must be checked"
+    },
+    "Tenderly": {
+      "url": "https://tenderly.co/products/node",
+      "networks": "ethereum polygon arbitrum optimism base",
+      "confidence": "node RPC provider docs, actual chains selected conservatively"
+    },
+    "Thirdweb": {
+      "url": "https://thirdweb.com/rpc",
+      "networks": "ethereum polygon bsc arbitrum optimism base avalanche gnosis linea zksync sonic celo unichain world-chain mantle scroll cronos sei metis monad hyperliquid berachain plasma",
+      "confidence": "EVM RPC product; documented 2500+ generic, per-chain existing listing required"
+    },
+    "Uniblock": {
+      "url": "https://chains.uniblock.dev/",
+      "networks": "",
+      "confidence": "chainlist is not proof of matching enterprise RPC product"
+    },
+    "Validation Cloud": {
+      "url": "https://www.validationcloud.io/network",
+      "networks": "ethereum arbitrum avalanche base berachain bsc core cronos hyperliquid ink linea mantle merlin metis monad opbnb optimism polygon ronin rootstock sonic taiko tempo unichain x-layer zircuit zksync apechain plume somnia",
+      "confidence": "supported network directory; RPC service must match"
+    },
+    "WatchData": {
+      "url": "https://docs.watchdata.io/",
+      "networks": "ethereum bsc polygon",
+      "confidence": "documented provider support only"
+    }
+  }
+}
