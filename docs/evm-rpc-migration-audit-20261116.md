@@ -81,3 +81,17 @@ The evidence table below is a **scope audit, not proof of individual Enterprise 
 - Sentio: [Supported networks](https://docs.sentio.xyz/docs/supported-network) and existing free/pay-as-you-go Archive rows in the repo (provider-side specific Enterprise Archive terms still unverified).
 
 Data and automated candidate generation were AI-assisted. No paid endpoint was accessed, and no new PR was opened. Submit only after full CI plus approval of scope and plan claims.
+
+## Full CI validation (2026-11-16)
+
+The candidate branch was tested with GitHub Actions run [#43789775418](https://github.com/Kefia-02/chain-love/actions/runs/43789775418), commit `54ab3c38663f355783db5b7e80119cd3efd30318`. **Conclusion: success.** The successful job ran:
+
+1. Four Python regression tests for global EVM JSON-RPC scoping (all passed).
+2. `check-global-api-scope.py` (passed).
+3. `validate_csv.py` (passed).
+4. `csv_to_json.py` (passed).
+5. `validate.py` over **138 network JSON files** (passed).
+
+The CI-only temporary push trigger was removed from the work branch after the successful run; normal upstream pull-request-triggered validation remains configured. The tool checkout was explicitly set to the upstream `Chain-Love/chain-love` `json-tools` branch, because the contributor fork lacks that branch.
+
+**CI proves structural and schema validity, not factual correctness of each provider's Enterprise/Archive entitlements.**
