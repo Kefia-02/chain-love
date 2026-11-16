@@ -17,12 +17,10 @@ install_guard() {
   sudo -n iptables -w -A "$v4" -m conntrack --ctstate ESTABLISHED,RELATED -j RETURN
   sudo -n ip6tables -w -A "$v6" -m conntrack --ctstate ESTABLISHED,RELATED -j RETURN
 
-  # Retain local stub-resolver access, if the host uses it; block all other
-  # loopback connections including HTTP to arbitrary localhost services.
-  for proto in tcp udp; do
-    sudo -n iptables -w -A "$v4" -d 127.0.0.0/8 -p "$proto" --dport 53 -j RETURN
-    sudo -n ip6tables -w -A "$v6" -d ::1/128 -p "$proto" --dport 53 -j RETURN
-  done
+  # Allow only UDP DNS to a local stub resolver; TCP/53 remains blocked
+  # so an HTTP endpoint listening there cannot bypass the egress policy.
+  sudo -n iptables -w -A "$v4" -d 127.0.0.0/8 -p udp --dport 53 -j RETURN
+  sudo -n ip6tables -w -A "$v6" -d ::1/128 -p udp --dport 53 -j RETURN
 
   # IANA non-global and private IPv4 ranges (including metadata/link-local,
   # shared, loopback, documentation, benchmarking, multicast and reserved).
