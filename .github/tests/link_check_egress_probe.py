@@ -77,6 +77,7 @@ def main():
     subprocess.run(["sudo", "-n", "tee", "-a", "/etc/hosts"], input=mapping,
                    capture_output=True, text=True, check=True)
     assert socket.gethostbyname("lychee-egress-alias.sandbox-runner.net") == "127.0.0.1"
+    assert socket.gethostbyname("lychee-egress-redirect.sandbox-runner.net") == "127.0.0.1"
 
     try:
         lychee(f"http://127.0.0.1:{target_port}/baseline", exclude=False)
@@ -99,7 +100,16 @@ def main():
             sudo("iptables", "-w", "-I", "LC_PRIVATE_V4", "1",
                  "-d", "127.0.0.1/32", "-p", "tcp",
                  "--dport", str(redirect_port), "-j", "RETURN")
-            lychee(f"http://lychee-egress-redirect.sandbox-runner.net:{redirect_port}/go")
+            # Validate that the exception admits the redirect source itself.
+            check = subprocess.run(
+                ["curl", "--noproxy", "*", "-sS", "--max-time", "4",
+                 "-o", "/dev/null", f"http://127.0.0.1:{redirect_port}/go"],
+                capture_output=True, text=True)
+            assert check.returncode == 0 and hits["redirect"] == 1, (
+                "Test-only redirect-source exception did not admit traffic")
+            hits["redirect"] = 0
+            rc = lychee(f"http://lychee-egress-redirect.sandbox-runner.net:{redirect_port}/go")
+            print(f"REDIRECT_INPUT_EXIT_CODE={rc}", flush=True)
             assert hits["redirect"] == 1, "Test redirect source was not fetched"
             assert hits["target"] == 1, "Firewall followed redirect into loopback"
             print("KERNEL_BLOCK_REDIRECT_TARGET=PASS", flush=True)
