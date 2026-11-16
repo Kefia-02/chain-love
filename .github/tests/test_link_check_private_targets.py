@@ -1,4 +1,5 @@
 """Offline policy regression; optional Lychee integration uses loopback only."""
+import os
 import re
 import shlex
 import shutil
@@ -60,15 +61,20 @@ class PrivateTargetPolicy(unittest.TestCase):
                 file.write_text(f"url\nhttp://127.0.0.1:{server.server_port}/\n")
                 base = ["lychee", "--extensions", "csv", "--method", "GET",
                         "--timeout", "2", "--max-retries", "0", "--no-progress"]
+                env = os.environ.copy()
+                for key in ("HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY",
+                            "http_proxy", "https_proxy", "all_proxy"):
+                    env.pop(key, None)
+                env["NO_PROXY"] = env["no_proxy"] = "*"
                 # Control: without the safety flag, the local test server receives GET.
                 first = subprocess.run([*base, str(file)], cwd=tmp,
-                                       capture_output=True, text=True, timeout=15)
+                                       capture_output=True, text=True, timeout=15, env=env)
                 self.assertGreater(Handler.count, 0, first.stdout + first.stderr)
                 before = Handler.count
                 _, configured = lychee_args()
                 flags = [x for x in configured if x == "--exclude-all-private"]
                 second = subprocess.run([*base, *flags, str(file)], cwd=tmp,
-                                        capture_output=True, text=True, timeout=15)
+                                        capture_output=True, text=True, timeout=15, env=env)
                 self.assertEqual(Handler.count, before, second.stdout + second.stderr)
         finally:
             server.shutdown()
