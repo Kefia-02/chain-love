@@ -2,7 +2,7 @@
   "issue": 4065,
   "base": "PR #5364 1RPC scoped migration",
   "policy": "This is a conservative candidate whitelist of provider networks based on public vendor references. A network pair is emitted ONLY if the catalog already contains a specific EVM JSON-RPC offer from the same provider on that exact chain. This does not prove archive or enterprise contract availability. Missing evidence MUST NOT be inferred as support.",
-  "reviewStatus": "candidate migration prepared on work branch; NOT applied to open PR #5364; full CSV conversion validation not run",
+  "reviewStatus": "42/42 original offers have scoped candidate replacements; do not merge without validating full converter and enterprise archive entitlements",
   "providers": {
     "Alchemy": {
       "url": "https://www.alchemy.com/docs/reference/node-supported-chains",
@@ -40,9 +40,12 @@
       "confidence": "first-party RPC docs state Ethereum and BNB and historical data; enterprise plan not directly observed"
     },
     "Crypto APIs": {
-      "url": "https://cryptoapis.io/",
-      "networks": "",
-      "confidence": "RPC advertised as request-access; no chain-specific RPC assertion"
+      "url": "https://developers.cryptoapis.io/v-2.2-176/JSON-RPC/general-information/overview",
+      "networks": "ethereum bsc polygon arbitrum optimism base ethereum-classic",
+      "confidence": "Official dedicated/shared Node-as-a-Service network matrix, both plans shown in existing listings; archive mode is preexisting in specific-network offers but enterprise historical-state entitlement unverified",
+      "otherSources": [
+        "https://cryptoapis.io/blog/99-ethereum-full-nodes-vs-archive-nodes"
+      ]
     },
     "dRPC": {
       "url": "https://drpc.org/docs/pricing/compute-units",
@@ -95,14 +98,14 @@
       "confidence": "network-doc"
     },
     "RPCFast": {
-      "url": "https://docs.rpcfast.com/rpc-fast-saas-evm/pricing-and-plans.md",
-      "networks": "ethereum base polygon bsc arbitrum",
-      "confidence": "EVM RPC plan docs; enterprise plan unconfirmed"
+      "url": "https://docs.rpcfast.com/self-hosted-cluster/archive-nodes",
+      "networks": "ethereum bsc",
+      "confidence": "Vendor explicitly states Archive Nodes on Ethereum and BNB Chain, self-hosted paid custom quote; precise Enterprise plan entitlement not confirmed"
     },
     "Sentio": {
-      "url": "https://docs.sentio.xyz/docs/readme",
-      "networks": "",
-      "confidence": "raw EVM RPC product not source-verified"
+      "url": "https://docs.sentio.xyz/docs/supported-network",
+      "networks": "ethereum arbitrum base avalanche",
+      "confidence": "Existing canonical Free + Pay-as-you-go Archive RPC scoped rows on these chains; enterprise archive plan entitlement not independently confirmed; vendor supported network page redirect unavailable"
     },
     "Spectrum": {
       "url": "https://spectrumnodes.com/docs/api-reference",
@@ -146,11 +149,6 @@
       "confidence": "documented provider support only"
     }
   },
-  "unverifiedOffers": [
-    "crypto-apis-enterprise-full-archive",
-    "crypto-apis-enterprise-recent-state",
-    "rpcfast-enterprise-full-archive",
-    "sentio-enterprise-full-archive"
-  ],
+  "unverifiedOffers": [],
   "note": "Unverified global offers are removed in candidate data, but not reintroduced on any network until product-specific endpoint evidence exists. Full export QA and maintainer review required."
 }
