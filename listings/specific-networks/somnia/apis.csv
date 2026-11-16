@@ -1,4 +1,5 @@
 slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,technology,chain,accessPrice,queryPrice,starred,trial,availableApis,limitations,securityImprovements,monitoringAndAnalytics,regions,additionalFeatures,address,tag,uptimeSla,blocksBehindSla,bandwidthSla,supportSla
+ankr-enterprise-full-archive-mainnet,,!offer:ankr-enterprise-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
 ankr-mainnet-free-full-archive,,!offer:ankr-free-full-archive,"[""[Website](https://www.ankr.com/rpc/?utm_referral=t26yw96jZJ)"",""[Docs](https://www.ankr.com/docs/rpc-service/chains/chains-list/#somnia)""]",,,,,,mainnet,,,,,,,,,,,,,,,,
 ankr-mainnet-free-recent-state,,!offer:ankr-free-recent-state,"[""[Website](https://www.ankr.com/rpc/?utm_referral=t26yw96jZJ)"",""[Docs](https://www.ankr.com/docs/rpc-service/chains/chains-list/#somnia)""]",,,,,,mainnet,,,,,,,,,,,,,,,,
 ankr-mainnet-pay-as-you-go-full-archive,,!offer:ankr-pay-as-you-go-full-archive,"[""[Buy](https://www.ankr.com/rpc/?utm_referral=t26yw96jZJ)"",""[Docs](https://www.ankr.com/docs/rpc-service/chains/chains-list/#somnia)""]",,,,,,mainnet,,,,,,,,,,,,,,,,
