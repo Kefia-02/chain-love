@@ -21,6 +21,12 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       
+      # Keep the guard outside the PR materialization directory, which gets
+      # intentionally wiped before invoking Lychee.
+      - name: Stage link-check network guard
+        run: |
+          install -m 0700 .github/scripts/link-check-egress.sh "$RUNNER_TEMP/link-check-egress.sh"
+
       - name: Materialize PR additions only
         if: github.event_name == 'pull_request'
         run: |
@@ -138,6 +144,10 @@ jobs:
               )
           PY
 
+      - name: Install private-destination egress guard
+        shell: bash
+        run: bash "$RUNNER_TEMP/link-check-egress.sh" install
+
       - name: Run Lychee on CSV files
         uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2
         with:
@@ -150,6 +160,7 @@ jobs:
           failIfEmpty: false
           args: >
             --extensions csv
+            --exclude-all-private
             --method GET
             --accept 200,202,204,400,401,403,405,429
             --timeout 15
@@ -159,6 +170,12 @@ jobs:
             --no-progress
             .
       
+      # Always undo the runner-wide firewall hooks before uploading results.
+      - name: Remove private-destination egress guard
+        if: always()
+        shell: bash
+        run: bash "$RUNNER_TEMP/link-check-egress.sh" remove
+
       - name: Save PR metadata
         if: github.event_name == 'pull_request'
         run: |
