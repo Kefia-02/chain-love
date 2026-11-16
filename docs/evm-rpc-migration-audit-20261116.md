@@ -63,13 +63,13 @@ The evidence table below is a **scope audit, not proof of individual Enterprise 
 
 - Global `all-networks/apis.csv` has no canonical `RPC + EVM JSON-RPC` rows after candidate migration.
 - Changed network CSVs were reread (30 files): 26 fields per row, slug-sorted, no duplicate slugs.
-- Four focused Python scope-guard unit tests were executed successfully in an isolated local reconstruction. The candidate branch itself has not run GitHub Actions CI; CI has succeeded only for the earlier PR #5364.
-- Full export and schema validation across all network outputs **has not been run**. No claim of complete CI approval or live enterprise verification.
+- Four Python scope-guard unit tests passed locally and also in the candidate branch's GitHub Actions run #43789775418.
+- Full CSV validation, JSON generation and 138-network schema checks have passed in GitHub Actions [run #43789775418](https://github.com/Kefia-02/chain-love/actions/runs/43789775418). Live Enterprise/Archive entitlement verification is still pending.
 
 ## Remaining verification gates
 
 - The 42 source records all have a replacement candidate, but **contract-specific availability of Enterprise and Archive modes is not established** by each provider's public network list. Maintainership review is required.
-- Validate full CSV-to-JSON generation and output schema for all networks. It has **not** been run on this work branch.
+- Full CSV-to-JSON generation and output schema validation passed on the work branch in CI. Repeat it on the final pull-request head if the candidate is submitted.
 - Check provider-specific EVM vs native RPC semantics for every added listing; a generic supported blockchain does not prove an EVM JSON-RPC service on that chain.
 - GitHub Database Population Program [limits each PR to 100 lines of code and/or 200 edited cells](https://github.com/Chain-Love/chain-love/discussions/41). This batch is over the stated limit as one PR and should **not** be appended blindly to #5364 if pursuing bounty eligibility.
 - One unrelated Arbitrum CSV URL quoting change introduced by automated rewriting was restored to the upstream original.
