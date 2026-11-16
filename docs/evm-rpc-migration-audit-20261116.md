@@ -7,8 +7,8 @@
 - One issue: #4065, concerning indiscriminate inheritance of network-limited EVM JSON-RPC API offers.
 - Original audit: 43 global CSV records, across 29 providers. The first provider (1RPC, one record) was submitted separately in PR #5364.
 - This batch: the other 42 former global CSV records, across 28 providers.
-- Network-specific replacement candidates: **195 rows** for **38 of 42** original records.
-- **4 offers** had no defensible network-specific replacement in the candidate; they were removed from global listings but are not reintroduced. Do not merge until this coverage impact is explicitly reviewed.
+- Network-specific replacement candidates: **215 rows** for **42 of 42** original records.
+- **Four previously unscoped offers were additionally mapped**: two Crypto APIs enterprise plan records, RPCFast archive and Sentio archive. Coverage candidates now exist for all 42 source records. Provider documentation and existing network-specific offer rows support the chains; exact paid plan entitlement remains to be verified.
 
 The evidence table below is a **scope audit, not proof of individual Enterprise / Archive plan entitlement or live endpoint availability**. A network must have vendor evidence plus another pre-existing chain-specific EVM JSON-RPC row from the same provider; a full-archive claim also needs pre-existing Archive metadata. Network folders without evidence were not populated. The whitelist itself requires provider-by-provider human scrutiny before merge.
 
@@ -27,8 +27,8 @@ The evidence table below is a **scope audit, not proof of individual Enterprise 
 | `blockpi-enterprise-full-archive` | BlockPi | 2 | [documentation](https://public.blockpi.io/) | Candidate; plan review required |
 | `blockpi-enterprise-recent-state` | BlockPi | 3 | [documentation](https://public.blockpi.io/) | Candidate; plan review required |
 | `blockvision-enterprise-full-archive` | BlockVision | 2 | [documentation](https://docs.blockvision.org/reference/welcome-to-blockvision) | Candidate; plan review required |
-| `crypto-apis-enterprise-full-archive` | Crypto APIs | 0 | [documentation](https://cryptoapis.io/) | Unverified: do not publish |
-| `crypto-apis-enterprise-recent-state` | Crypto APIs | 0 | [documentation](https://cryptoapis.io/) | Unverified: do not publish |
+| `crypto-apis-enterprise-full-archive` | Crypto APIs | 7 | [NaaS supported networks](https://developers.cryptoapis.io/v-2.2-176/JSON-RPC/general-information/overview) | Candidate; enterprise archive entitlement review required |
+| `crypto-apis-enterprise-recent-state` | Crypto APIs | 7 | [NaaS supported networks](https://developers.cryptoapis.io/v-2.2-176/JSON-RPC/general-information/overview) | Candidate; enterprise plan review required |
 | `drpc-enterprise-recent-state` | dRPC | 3 | [documentation](https://drpc.org/docs/pricing/compute-units) | Candidate; plan review required |
 | `dwellir-enterprise-full-archive` | Dwellir | 7 | [documentation](https://www.dwellir.com/docs) | Candidate; plan review required |
 | `dwellir-enterprise-recent-state` | Dwellir | 10 | [documentation](https://www.dwellir.com/docs) | Candidate; plan review required |
@@ -44,8 +44,8 @@ The evidence table below is a **scope audit, not proof of individual Enterprise 
 | `omnia-enterprise-recent-state` | Omnia | 5 | [documentation](https://docs.omniatech.io/rpc-api-docs/chains) | Candidate; plan review required |
 | `onfinality-enterprise-full-archive` | OnFinality | 1 | [documentation](https://onfinality.io/en/networks) | Candidate; plan review required |
 | `radiumblock-enterprise-recent-state` | RadiumBlock | 3 | [documentation](https://radiumblock.com/pricing.html) | Candidate; plan review required |
-| `rpcfast-enterprise-full-archive` | RPCFast | 0 | [documentation](https://docs.rpcfast.com/rpc-fast-saas-evm/pricing-and-plans.md) | Unverified: do not publish |
-| `sentio-enterprise-full-archive` | Sentio | 0 | [documentation](https://docs.sentio.xyz/docs/readme) | Unverified: do not publish |
+| `rpcfast-enterprise-full-archive` | RPCFast | 2 | [Archive nodes (ETH/BNB)](https://docs.rpcfast.com/self-hosted-cluster/archive-nodes) | Candidate; contract entitlement review required |
+| `sentio-enterprise-full-archive` | Sentio | 4 | [supported networks](https://docs.sentio.xyz/docs/supported-network) | Candidate; enterprise archive entitlement review required |
 | `spectrum-custom-full-archive` | Spectrum | 8 | [documentation](https://spectrumnodes.com/docs/api-reference) | Candidate; plan review required |
 | `spectrum-custom-recent-state` | Spectrum | 8 | [documentation](https://spectrumnodes.com/docs/api-reference) | Candidate; plan review required |
 | `spectrum-custom-trace` | Spectrum | 8 | [documentation](https://spectrumnodes.com/docs/api-reference) | Candidate; plan review required |
@@ -63,14 +63,21 @@ The evidence table below is a **scope audit, not proof of individual Enterprise 
 
 - Global `all-networks/apis.csv` has no canonical `RPC + EVM JSON-RPC` rows after candidate migration.
 - Changed network CSVs were reread (30 files): 26 fields per row, slug-sorted, no duplicate slugs.
-- Four focused Python unit tests for the newly added global scope guard passed. The guard also protects pull-request and release workflows.
+- Four focused Python scope-guard unit tests were executed successfully in an isolated local reconstruction. The candidate branch itself has not run GitHub Actions CI; CI has succeeded only for the earlier PR #5364.
 - Full export and schema validation across all network outputs **has not been run**. No claim of complete CI approval or live enterprise verification.
 
-## Handling of unverified offers
+## Remaining verification gates
 
-- `crypto-apis-enterprise-full-archive` — canonical provider Crypto APIs; source product/chain evidence insufficient.
-- `crypto-apis-enterprise-recent-state` — canonical provider Crypto APIs; source product/chain evidence insufficient.
-- `rpcfast-enterprise-full-archive` — canonical provider RPCFast; source product/chain evidence insufficient.
-- `sentio-enterprise-full-archive` — canonical provider Sentio; source product/chain evidence insufficient.
+- The 42 source records all have a replacement candidate, but **contract-specific availability of Enterprise and Archive modes is not established** by each provider's public network list. Maintainership review is required.
+- Validate full CSV-to-JSON generation and output schema for all networks. It has **not** been run on this work branch.
+- Check provider-specific EVM vs native RPC semantics for every added listing; a generic supported blockchain does not prove an EVM JSON-RPC service on that chain.
+- GitHub Database Population Program [limits each PR to 100 lines of code and/or 200 edited cells](https://github.com/Chain-Love/chain-love/discussions/41). This batch is over the stated limit as one PR and should **not** be appended blindly to #5364 if pursuing bounty eligibility.
+- One unrelated Arbitrum CSV URL quoting change introduced by automated rewriting was restored to the upstream original.
 
-This document was prepared using AI-assisted code and documentation comparison. Do not treat published vendor chain lists alone as proof of every paid plan or Archive mode. Keep batch separate from PR #5364 until acceptance criteria and a full validator run can be met.
+## Sources for the final four
+
+- Crypto APIs: [NaaS supported networks](https://developers.cryptoapis.io/v-2.2-176/JSON-RPC/general-information/overview), plus [its Ethereum nodes and archive explanation](https://cryptoapis.io/blog/99-ethereum-full-nodes-vs-archive-nodes).
+- RPCFast: [Archive Nodes on Ethereum and BNB Chain](https://docs.rpcfast.com/self-hosted-cluster/archive-nodes).
+- Sentio: [Supported networks](https://docs.sentio.xyz/docs/supported-network) and existing free/pay-as-you-go Archive rows in the repo (provider-side specific Enterprise Archive terms still unverified).
+
+Data and automated candidate generation were AI-assisted. No paid endpoint was accessed, and no new PR was opened. Submit only after full CI plus approval of scope and plan claims.
