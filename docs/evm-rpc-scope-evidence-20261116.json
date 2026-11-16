@@ -2,7 +2,7 @@
   "issue": 4065,
   "base": "PR #5364 1RPC scoped migration",
   "policy": "This is a conservative candidate whitelist of provider networks based on public vendor references. A network pair is emitted ONLY if the catalog already contains a specific EVM JSON-RPC offer from the same provider on that exact chain. This does not prove archive or enterprise contract availability. Missing evidence MUST NOT be inferred as support.",
-  "reviewStatus": "42/42 original offers have scoped candidate replacements; do not merge without validating full converter and enterprise archive entitlements",
+  "reviewStatus": "Candidate data only: structurally validated, commercial plan and per-chain historical-state review outstanding.",
   "providers": {
     "Alchemy": {
       "url": "https://www.alchemy.com/docs/reference/node-supported-chains",
@@ -150,5 +150,5 @@
     }
   },
   "unverifiedOffers": [],
-  "note": "Unverified global offers are removed in candidate data, but not reintroduced on any network until product-specific endpoint evidence exists. Full export QA and maintainer review required."
+  "note": "All 42 previously global EVM RPC offers have network-specific candidate rows. Structural CI passed for the unchanged CSV at commit 54ab3c3, but public provider network documentation alone does not verify Enterprise/Archive plan entitlements. No new PR submitted."
 }
