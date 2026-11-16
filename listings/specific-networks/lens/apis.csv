@@ -1,4 +1,5 @@
 slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,technology,chain,accessPrice,queryPrice,starred,trial,availableApis,limitations,securityImprovements,monitoringAndAnalytics,regions,additionalFeatures,address,tag,uptimeSla,blocksBehindSla,bandwidthSla,supportSla
+alchemy-enterprise-recent-state-mainnet,,!offer:alchemy-enterprise-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 alchemy-mainnet-free,,!offer:alchemy-free-recent-state,"[""[Website](https://www.alchemy.com/)"",""[Docs](https://lens.xyz/docs/chain/tools/rpc/alchemy)""]",,,,,,mainnet,,,,,,,,,,,,,,,,
 alchemy-mainnet-pay-as-you-go,,!offer:alchemy-pay-as-you-go-recent-state,"[""[Buy](https://www.alchemy.com/pricing)"",""[Docs](https://lens.xyz/docs/chain/tools/rpc/alchemy)""]",,,,,,mainnet,$49/$199,,,,,,,,,,,,,,,
 alchemy-testnet-free,,!offer:alchemy-free-recent-state,"[""[Website](https://www.alchemy.com/)"",""[Docs](https://lens.xyz/docs/chain/tools/rpc/alchemy)""]",,,,,,testnet,,,,,,,,,,,,,,,,
