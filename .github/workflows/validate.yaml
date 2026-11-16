@@ -1,9 +1,6 @@
 name: "Validate JSON"
 
 on:
-  push:
-    branches:
-      - work/global-evm-rpc-remaining42-20261116
   pull_request:
     branches:
       - main
