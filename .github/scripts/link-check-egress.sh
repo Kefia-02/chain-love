@@ -12,6 +12,11 @@ install_guard() {
   sudo -n iptables -w -N "$v4"
   sudo -n ip6tables -w -N "$v6"
 
+  # Let response packets for already-established local sessions return.
+  # New outbound connections to private destinations are still denied.
+  sudo -n iptables -w -A "$v4" -m conntrack --ctstate ESTABLISHED,RELATED -j RETURN
+  sudo -n ip6tables -w -A "$v6" -m conntrack --ctstate ESTABLISHED,RELATED -j RETURN
+
   # Retain local stub-resolver access, if the host uses it; block all other
   # loopback connections including HTTP to arbitrary localhost services.
   for proto in tcp udp; do
