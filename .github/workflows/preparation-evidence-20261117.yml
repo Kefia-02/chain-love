@@ -1,0 +1,53 @@
+name: Official evidence for submission preparation (fork only)
+on:
+  push:
+    branches: [json-tools]
+    paths: [.github/workflows/preparation-evidence-20261117.yml]
+permissions:
+  contents: read
+jobs:
+  evidence:
+    if: github.repository == 'Kefia-02/chain-love'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fetch public official documentation and unpaid HTTP responses
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import urllib.request
+          import urllib.error
+          
+          sources = [
+              ("style-guide", "https://raw.githubusercontent.com/wiki/Chain-Love/chain-love/Style-Guide.md"),
+              ("common-columns", "https://raw.githubusercontent.com/wiki/Chain-Love/chain-love/Common-Columns.md"),
+              ("apis-guide", "https://raw.githubusercontent.com/wiki/Chain-Love/chain-love/APIs.md"),
+              ("analytics-guide", "https://raw.githubusercontent.com/wiki/Chain-Love/chain-love/Analytics.md"),
+              ("references-guide", "https://raw.githubusercontent.com/wiki/Chain-Love/chain-love/References-Syntax.md"),
+              ("categories-guide", "https://raw.githubusercontent.com/wiki/Chain-Love/chain-love/Categories-definitions.md"),
+              ("fuse-openapi", "https://ai.fuse.io/openapi.json"),
+              ("fuse-health", "https://ai.fuse.io/health"),
+              ("fuse-unpaid-stats", "https://ai.fuse.io/api/fuse/stats"),
+              ("nansen-dashboard", "https://app.nansen.ai"),
+              ("nansen-mismatched-link", "https://app.nansen.ai/token-god-mode?tokenAddress=ALGO&chain=hyperliquid&tab=transactions"),
+          ]
+          for key, url in sources:
+              item = {"key": key, "url": url}
+              try:
+                  req = urllib.request.Request(url, headers={"User-Agent": "ChainLove-pre-submission-check/1.0"})
+                  try:
+                      response = urllib.request.urlopen(req, timeout=20)
+                  except urllib.error.HTTPError as error:
+                      response = error
+                  with response:
+                      item["status"] = response.code
+                      item["final_url"] = response.geturl()
+                      item["content_type"] = response.headers.get("Content-Type")
+                      item["payment_headers"] = {k: v for k, v in response.headers.items() if k.lower() in ("payment-required", "x-payment-required", "www-authenticate")}
+                      body = response.read().decode("utf-8", errors="replace")
+                      item["body"] = body if key not in ("nansen-dashboard", "nansen-mismatched-link") else body[:160]
+              except Exception as error:
+                  item["error"] = str(error)
+              print("EVIDENCE_JSON " + json.dumps(item, ensure_ascii=True), flush=True)
+          PY
