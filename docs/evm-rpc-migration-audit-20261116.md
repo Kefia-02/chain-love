@@ -62,7 +62,7 @@ The evidence table below is a **scope audit, not proof of individual Enterprise 
 ## Regression checks
 
 - Global `all-networks/apis.csv` has no canonical `RPC + EVM JSON-RPC` rows after candidate migration.
-- Changed network CSVs were reread (30 files): 26 fields per row, slug-sorted, no duplicate slugs.
+- Changed network CSVs were reread (31 files): 26 fields per row, slug-sorted, no duplicate slugs.
 - Four Python scope-guard unit tests passed locally and also in the candidate branch's GitHub Actions run #43789775418.
 - Full CSV validation, JSON generation and 138-network schema checks have passed in GitHub Actions [run #43789775418](https://github.com/Kefia-02/chain-love/actions/runs/43789775418). Live Enterprise/Archive entitlement verification is still pending.
 
