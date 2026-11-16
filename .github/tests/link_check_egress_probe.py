@@ -105,7 +105,7 @@ def main():
                 ["curl", "--noproxy", "*", "-sS", "--max-time", "4",
                  "-o", "/dev/null", f"http://127.0.0.1:{redirect_port}/go"],
                 capture_output=True, text=True)
-            print(f"REDIRECT_SOURCE_DIAGNOSTIC=rc:{check.returncode},hits:{hits[\'redirect\']},port:{redirect_port},err:{check.stderr[:200]}", flush=True)
+            print("REDIRECT_SOURCE_DIAGNOSTIC=", check.returncode, hits["redirect"], redirect_port, check.stderr[:200], flush=True)
             print(sudo("iptables", "-w", "-nvL", "LC_PRIVATE_V4").stdout[:2400], flush=True)
             assert check.returncode == 0 and hits["redirect"] == 1, (
                 "Test-only redirect-source exception did not admit traffic")
