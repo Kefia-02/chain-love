@@ -1,0 +1,118 @@
+name: Validate prepared listings (fork only)
+on:
+  push:
+    branches: [json-tools]
+    paths: [.github/workflows/preparation-validation-20261117.yml]
+permissions:
+  contents: read
+jobs:
+  validate:
+    if: github.repository == 'Kefia-02/chain-love'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - case: nansen
+            source_ref: b5691b0e0693dce9236094047a04cc6dc7db0b03
+          - case: fuse
+            source_ref: 294d2af445e44acdc5c343aec48ed21ad9e7488c
+    steps:
+      - name: Checkout exact prepared source commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.source_ref }}
+          path: data
+          persist-credentials: false
+      - name: Checkout unmodified upstream validation tools
+        uses: actions/checkout@v4
+        with:
+          ref: 4e979403c3eef6fdfcd7f5d6cf4ae25f6254aa2b
+          path: harness
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prepare official validators and offline dependencies
+        run: |
+          cp harness/tools/csv_to_json.py harness/tools/validate_csv.py harness/tools/validate.py harness/tools/schema.json harness/tools/test_action_buttons_max.py data/
+          cp -r harness/meta data/
+          python -m pip install --no-index --find-links=harness/tools/wheels -r harness/tools/requirements.txt
+      - name: Validate CSV ordering
+        working-directory: data
+        run: python validate_csv.py
+      - name: Generate all network JSON
+        working-directory: data
+        run: python csv_to_json.py
+      - name: Validate generated JSON schema and repository rules
+        working-directory: data
+        run: python validate.py
+      - name: Run existing action button regression tests
+        if: always()
+        working-directory: data
+        run: python test_action_buttons_max.py
+      - name: Check targeted hydration, CSV fields, and provider dependency
+        if: always()
+        working-directory: data
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          import json
+          from pathlib import Path
+          from jsonschema import Draft202012Validator
+          import csv_to_json as converter
+          
+          case = "${{ matrix.case }}"
+          
+          def rows(path, columns, count):
+              with open(path, encoding="utf-8", newline="") as stream:
+                  parsed = list(csv.reader(stream, strict=True))
+              assert len(parsed[0]) == columns, (path, "header columns")
+              assert len(parsed) - 1 == count, (path, "data row count")
+              assert all(len(row) == columns for row in parsed[1:]), (path, "row columns")
+              slugs = [row[0] for row in parsed[1:]]
+              assert slugs == sorted(slugs), (path, "sort order")
+              assert len(slugs) == len(set(slugs)), (path, "duplicate slugs")
+              return [dict(zip(parsed[0], row)) for row in parsed[1:]]
+          
+          if case == "nansen":
+              source = rows("listings/specific-networks/algorand/analytics.csv", 14, 46)
+              listing = next(row for row in source if row["slug"] == "nansen-mainnet")
+              assert listing["offer"] == "!offer:nansen" and listing["actionButtons"] == ""
+              output = json.loads(Path("json/algorand.json").read_text())
+              actual = next(row for row in output["analytics"] if row["slug"] == "nansen-mainnet")
+              assert actual["actionButtons"] == ["[Dashboard](https://app.nansen.ai)"]
+              assert actual["provider"] == "Nansen" and actual["chain"] == "mainnet"
+              assert "hyperliquid" not in json.dumps(actual["actionButtons"])
+              print("FOCUSED_RESULT " + json.dumps({"case": case, "result": "PASS", "columns": 14, "rows": 46, "hydrated_actionButtons": actual["actionButtons"]}))
+          else:
+              offers = rows("references/offers/apis.csv", 25, 402)
+              listings = rows("listings/specific-networks/fuse/apis.csv", 26, 3)
+              listing = next(row for row in listings if row["slug"] == "fuse-ai-pay-per-request-mainnet")
+              offer = next(row for row in offers if row["slug"] == "fuse-ai-pay-per-request")
+              all_offers = converter.load_categories_from_folder("references/offers")
+              resolved = converter.resolve_offers({"apis": [listing]}, all_offers, network_name="fuse")
+              normalized, errors = converter.normalize(resolved)
+              assert not errors, errors
+              actual = normalized["apis"][0]
+              schema = json.loads(Path("schema.json").read_text())
+              Draft202012Validator(schema["$defs"]["apis"]).validate(actual)
+              assert actual["apiType"] == "Custom" and actual["technology"] == "REST"
+              assert actual["historicalData"] == "Pruned" and actual["address"] is None
+              assert len(actual["actionButtons"]) == 2 and actual["chain"] == "mainnet"
+              assert len(actual["availableApis"]) == 6
+              assert all(value == "" for key, value in listing.items() if key not in ("slug", "offer", "chain"))
+              providers = converter.load_providers("references/providers/providers.csv")
+              index = converter.build_provider_index_by_name(providers)
+              try:
+                  converter.build_provider_meta_from_names(index, {"Fuse": {"apis"}}, network="fuse")
+              except ValueError as error:
+                  assert "Provider 'Fuse' is missing" in str(error), str(error)
+                  blocker = str(error).splitlines()[0]
+              else:
+                  raise AssertionError("Expected missing Fuse provider blocker was not reproduced")
+              print("FOCUSED_RESULT " + json.dumps({"case": case, "row_schema": "PASS", "reference_and_columns": "PASS", "canonical_rows": 402, "listing_rows": 3, "generation": "BLOCKED", "blocker": blocker, "submission_ready": False}))
+          PY
