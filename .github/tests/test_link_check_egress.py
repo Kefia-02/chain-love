@@ -26,6 +26,7 @@ class TestLinkCheckEgress(unittest.TestCase):
         self.assertIn('sudo -n iptables -w -I OUTPUT 1', guard)
         self.assertIn('sudo -n ip6tables -w -I OUTPUT 1', guard)
         self.assertIn("ESTABLISHED,RELATED", guard)
+        self.assertNotIn("-p tcp --dport 53", guard)
         self.assertIn('install) install_guard', guard)
         self.assertIn('remove) remove_guard', guard)
 
