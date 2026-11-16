@@ -21,11 +21,27 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       
-      # Keep the guard outside the PR materialization directory, which gets
-      # intentionally wiped before invoking Lychee.
+      # Materialization intentionally deletes the checked-out tree. Preserve
+      # a trusted copy of the guard outside the workspace before that happens.
       - name: Stage link-check network guard
+        shell: bash
         run: |
-          install -m 0700 .github/scripts/link-check-egress.sh "$RUNNER_TEMP/link-check-egress.sh"
+          set -euo pipefail
+          guard=.github/scripts/link-check-egress.sh
+          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+            git fetch --no-tags origin "$GITHUB_BASE_REF"
+            if git cat-file -e "origin/$GITHUB_BASE_REF:$guard" 2>/dev/null; then
+              # Never execute a guard implementation supplied by a contributor.
+              git show "origin/$GITHUB_BASE_REF:$guard" > "$RUNNER_TEMP/link-check-egress.sh"
+            else
+              # Bootstrap for this initial security fix PR, before the file is
+              # present on main; following PRs always use the base copy.
+              cp "$guard" "$RUNNER_TEMP/link-check-egress.sh"
+            fi
+          else
+            cp "$guard" "$RUNNER_TEMP/link-check-egress.sh"
+          fi
+          chmod 0700 "$RUNNER_TEMP/link-check-egress.sh"
 
       - name: Materialize PR additions only
         if: github.event_name == 'pull_request'
