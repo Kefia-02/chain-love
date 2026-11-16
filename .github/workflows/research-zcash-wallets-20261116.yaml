@@ -1,0 +1,70 @@
+name: Research Zcash retired wallet listing verification
+
+on:
+  push:
+    branches:
+      - fix/zcash-retired-wallets-20261116
+    paths:
+      - listings/specific-networks/zcash/wallets.csv
+      - .github/workflows/research-zcash-wallets-20261116.yaml
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout proposed data fix
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Checkout public upstream exporter
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: Chain-Love/chain-love
+          ref: 4e979403c3eef6fdfcd7f5d6cf4ae25f6254aa2b
+          path: json-tools
+          persist-credentials: false
+      - name: Use Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+      - name: Run actual upstream CSV and generated-JSON validators
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp json-tools/tools/csv_to_json.py .
+          cp json-tools/tools/validate_csv.py .
+          cp json-tools/tools/validate.py .
+          cp json-tools/tools/schema.json .
+          cp -r json-tools/meta .
+          python -m pip install --no-index --find-links=json-tools/tools/wheels -r json-tools/tools/requirements.txt
+          python validate_csv.py
+          python csv_to_json.py
+          python validate.py
+      - name: Verify Zcash wallet removal and all other network listings remain generated
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          import json
+          from pathlib import Path
+          path = Path('listings/specific-networks/zcash/wallets.csv')
+          with path.open(encoding='utf-8', newline='') as stream:
+              rows = list(csv.DictReader(stream))
+          names = {row['slug'] for row in rows}
+          assert 'ywallet' not in names and 'zecwallet' not in names
+          assert len(rows) == 16, f'Unexpected wallet row count: {len(rows)}'
+          generated = json.loads(Path('json/zcash.json').read_text(encoding='utf-8'))
+          output = {item['slug'] for item in generated['wallets']}
+          assert 'ywallet' not in output and 'zecwallet' not in output
+          assert len(output) >= 16
+          assert 'guarda' in output and 'ledger' in output
+          other = len(list(Path('json').glob('*.json')))
+          assert other >= 138, f'Unexpected number of generated networks: {other}'
+          print('ZCASH_RETIRED_WALLET_REMOVAL=PASS')
+          print('OTHER_ZCASH_WALLETS_PRESERVED=PASS')
+          print('GENERATED_NETWORKS=', other)
+          PY
