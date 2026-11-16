@@ -105,13 +105,10 @@ def main():
                 ["curl", "--noproxy", "*", "-sS", "--max-time", "4",
                  "-o", "/dev/null", f"http://127.0.0.1:{redirect_port}/go"],
                 capture_output=True, text=True)
-            print("REDIRECT_SOURCE_DIAGNOSTIC=", check.returncode, hits["redirect"], redirect_port, check.stderr[:200], flush=True)
-            print(sudo("iptables", "-w", "-nvL", "LC_PRIVATE_V4").stdout[:2400], flush=True)
             assert check.returncode == 0 and hits["redirect"] == 1, (
                 "Test-only redirect-source exception did not admit traffic")
             hits["redirect"] = 0
-            rc = lychee(f"http://lychee-egress-redirect.sandbox-runner.net:{redirect_port}/go")
-            print(f"REDIRECT_INPUT_EXIT_CODE={rc}", flush=True)
+            lychee(f"http://lychee-egress-redirect.sandbox-runner.net:{redirect_port}/go")
             assert hits["redirect"] == 1, "Test redirect source was not fetched"
             assert hits["target"] == 1, "Firewall followed redirect into loopback"
             print("KERNEL_BLOCK_REDIRECT_TARGET=PASS", flush=True)
