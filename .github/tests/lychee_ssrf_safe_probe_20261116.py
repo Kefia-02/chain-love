@@ -6,6 +6,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import os
 import shutil
+import socket
 import subprocess
 import tempfile
 from threading import Lock, Thread
@@ -66,6 +67,12 @@ def invoke(url, exclude, tempdir):
 def main():
     global target_port
     assert shutil.which("lychee"), "Pinned Lychee binary unavailable"
+    # Bind both hostnames strictly to the disposable local loopback server.
+    hosts = "127.0.0.1 lychee-alias.sandbox-runner.net lychee-redirect.sandbox-runner.net\n"
+    subprocess.run(["sudo", "tee", "-a", "/etc/hosts"], input=hosts, text=True,
+                   capture_output=True, check=True)
+    for name in ("lychee-alias.sandbox-runner.net", "lychee-redirect.sandbox-runner.net"):
+        assert socket.gethostbyname(name) == "127.0.0.1", "Nonlocal DNS resolution"
     target = serve("target")
     target_port = target.server_address[1]
     redirect = serve("redirect")
@@ -88,12 +95,12 @@ def main():
             print("LITERAL_LOOPBACK_BLOCK=PASS")
 
             # DNS alias is locally pinned in /etc/hosts; no real DNS lookup needed.
-            invoke(f"http://lychee-alias.test:{target_port}/alias", True, tempdir)
+            invoke(f"http://lychee-alias.sandbox-runner.net:{target_port}/alias", True, tempdir)
             assert counts["target"] == 2, "DNS-host alias was not delivered"
             print("DNS_ALIAS_BYPASS=CONFIRMED_IN_ISOLATED_TEST")
 
             # The redirecting endpoint and its destination are both our loopback servers.
-            invoke(f"http://lychee-redirect.test:{redirect_port}/go", True, tempdir)
+            invoke(f"http://lychee-redirect.sandbox-runner.net:{redirect_port}/go", True, tempdir)
             assert counts["redirect"] == 1 and counts["target"] == 3, "Redirect was not followed"
             print("REDIRECT_TO_LOOPBACK_BYPASS=CONFIRMED_IN_ISOLATED_TEST")
 
