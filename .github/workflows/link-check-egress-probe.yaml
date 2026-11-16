@@ -20,6 +20,9 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
+      - name: Static guard and workflow regression tests
+        shell: bash
+        run: python3 -m unittest discover -s .github/tests -p 'test_link_check_egress.py' -v
       - name: Install pinned Lychee v0.24.2
         shell: bash
         run: |
