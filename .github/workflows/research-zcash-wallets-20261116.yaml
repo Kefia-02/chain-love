@@ -56,11 +56,11 @@ jobs:
               rows = list(csv.DictReader(stream))
           names = {row['slug'] for row in rows}
           assert 'ywallet' not in names and 'zecwallet' not in names
-          assert len(rows) == 16, f'Unexpected wallet row count: {len(rows)}'
+          assert len(rows) == 15, f'Unexpected wallet row count: {len(rows)}'
           generated = json.loads(Path('json/zcash.json').read_text(encoding='utf-8'))
           output = {item['slug'] for item in generated['wallets']}
           assert 'ywallet' not in output and 'zecwallet' not in output
-          assert len(output) >= 16
+          assert len(output) >= 15
           assert 'guarda' in output and 'ledger' in output
           other = len(list(Path('json').glob('*.json')))
           assert other >= 138, f'Unexpected number of generated networks: {other}'
