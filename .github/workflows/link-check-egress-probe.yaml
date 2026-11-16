@@ -1,0 +1,46 @@
+name: Link-check egress security verification (fork only)
+
+on:
+  push:
+    branches:
+      - fix/link-check-block-private-egress-20261116
+    paths:
+      - .github/scripts/link-check-egress.sh
+      - .github/tests/link_check_egress_probe.py
+      - .github/workflows/link-check-egress-probe.yaml
+
+permissions:
+  contents: read
+
+jobs:
+  verify-kernel-egress:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Install pinned Lychee v0.24.2
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/lychee-verify"
+          curl -fsSL --retry 2 --max-time 60 \
+            "https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.2/lychee-x86_64-unknown-linux-gnu.tar.gz" \
+            -o "$RUNNER_TEMP/lychee-verify/lychee.tar.gz"
+          tar -xzf "$RUNNER_TEMP/lychee-verify/lychee.tar.gz" -C "$RUNNER_TEMP/lychee-verify"
+          LYCHEE_BIN="$(find "$RUNNER_TEMP/lychee-verify" -type f -name lychee -print -quit)"
+          test -n "$LYCHEE_BIN"
+          mkdir -p "$RUNNER_TEMP/lychee-bin"
+          install -m 0755 "$LYCHEE_BIN" "$RUNNER_TEMP/lychee-bin/lychee"
+          echo "$RUNNER_TEMP/lychee-bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/lychee-bin/lychee" --version
+      - name: Verify local DNS and redirect targets are blocked by kernel
+        shell: bash
+        env:
+          EGRESS_SCRIPT: ${{ github.workspace }}/.github/scripts/link-check-egress.sh
+        run: python3 .github/tests/link_check_egress_probe.py
+      - name: Cleanup firewall on test failures
+        if: always()
+        shell: bash
+        run: bash .github/scripts/link-check-egress.sh remove
