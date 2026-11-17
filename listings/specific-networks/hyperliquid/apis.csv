@@ -8,5 +8,7 @@ chainstack-mainnet-developer-recent-state,,!offer:chainstack-developer-recent-st
 drpc-mainnet-free-recent-state,,!offer:drpc-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 drpc-mainnet-pay-as-you-go-recent-state,,!offer:drpc-pay-as-you-go-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 drpc-mainnet-public-recent-state,,!offer:drpc-public-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
+etherscan-api-mainnet-enterprise-full-archive,,!offer:etherscan-api-enterprise-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
+moralis-mainnet-indexer-enterprise,,!offer:moralis-indexer-enterprise,,,,,,,mainnet,,,,,,,,,,,,,,,,
 onfinality-mainnet-developer-full-archive,,!offer:onfinality-developer-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
 quicknode-mainnet-build-recent-state,,!offer:quicknode-build-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
