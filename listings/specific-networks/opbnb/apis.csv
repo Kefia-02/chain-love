@@ -3,3 +3,4 @@ slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,techn
 1rpc-mainnet-personal-recent-state,,!offer:1rpc-personal-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 1rpc-mainnet-public-recent-state,,!offer:1rpc-public-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 1rpc-mainnet-starter-recent-state,,!offer:1rpc-starter-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
+alchemy-mainnet-enterprise-recent-state,,!offer:alchemy-enterprise-recent-state,,,,,,,mainnet,,,,,"[""eth"",""net"",""web3""]",,,,,,,,,,,
