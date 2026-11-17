@@ -23,6 +23,7 @@ goldrush-mainnet-free-indexer,,!offer:goldrush-free-indexer,"[""[Website](https:
 goldrush-mainnet-pay-as-you-go-indexer,,!offer:goldrush-pay-as-you-go-indexer,"[""[Website](https://goldrush.dev/chains/axie-ronin/)"",""[Docs](https://docs.roninchain.com/developers/tools/api-providers)""]",,,,,,mainnet,,,,,,,,,,,,,,,,
 moralis-mainnet-business-full-archive,,!offer:moralis-business-full-archive,"[""[Website](https://developers.moralis.com/chains/ronin/)"", ""[Docs](https://docs.moralis.com/rpc-nodes/ronin/overview)""]",,,,,,mainnet,,,,,,,,,,,,,,,,
 moralis-mainnet-free-full-archive,,!offer:moralis-free-full-archive,"[""[Website](https://developers.moralis.com/chains/ronin/)"", ""[Docs](https://docs.moralis.com/rpc-nodes/ronin/overview)""]",,,,,,mainnet,,,,,,,,,,,,,,,,
+moralis-mainnet-indexer-enterprise,,!offer:moralis-indexer-enterprise,,,,,,,mainnet,,,,,,,,,,,,,,,,
 moralis-mainnet-pro-full-archive,,!offer:moralis-pro-full-archive,"[""[Website](https://developers.moralis.com/chains/ronin/)"", ""[Docs](https://docs.moralis.com/rpc-nodes/ronin/overview)""]",,,,,,mainnet,,,,,,,,,,,,,,,,
 moralis-testnet-free-full-archive,,!offer:moralis-free-full-archive,"[""[Website](https://developers.moralis.com/chains/ronin/)"", ""[Docs](https://docs.moralis.com/rpc-nodes/ronin/overview)""]",,,,,,testnet,,,,,,,,,,,,,,,,
 tatum-mainnet-free-recent-state,,!offer:tatum-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,

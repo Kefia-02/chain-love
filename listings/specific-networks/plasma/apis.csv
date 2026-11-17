@@ -2,6 +2,7 @@ slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,techn
 alchemy-mainnet-free-recent-state,,!offer:alchemy-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 chainstack-mainnet-developer-recent-state,,!offer:chainstack-developer-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 drpc-mainnet-free-recent-state,,!offer:drpc-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
+etherscan-api-mainnet-enterprise-full-archive,,!offer:etherscan-api-enterprise-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
 quicknode-mainnet-build-recent-state,,!offer:quicknode-build-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 tenderly-mainnet-free-recent-state,,!offer:tenderly-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 thirdweb-mainnet-starter-recent-state,,!offer:thirdweb-starter-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
