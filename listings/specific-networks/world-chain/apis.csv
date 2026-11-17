@@ -1,5 +1,6 @@
 slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,technology,chain,accessPrice,queryPrice,starred,trial,availableApis,limitations,securityImprovements,monitoringAndAnalytics,regions,additionalFeatures,address,tag,uptimeSla,blocksBehindSla,bandwidthSla,supportSla
 1rpc-testnet-developer-recent-state,,!offer:1rpc-developer-recent-state,,,,,,,testnet,,,,,,,,,,,,,,,,
+alchemy-mainnet-enterprise-recent-state,,!offer:alchemy-enterprise-recent-state,,,,,,,mainnet,,,,,"[""eth"",""net"",""web3""]",,,,,,,,,,,
 alchemy-mainnet-free-recent-state,,!offer:alchemy-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 alchemy-testnet-free-recent-state,,!offer:alchemy-free-recent-state,,,,,,,testnet,,,,,,,,,,,,,,,,
 etherscan-api-mainnet-enterprise-full-archive,,!offer:etherscan-api-enterprise-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
