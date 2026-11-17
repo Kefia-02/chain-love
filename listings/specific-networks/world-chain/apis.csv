@@ -2,6 +2,7 @@ slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,techn
 1rpc-testnet-developer-recent-state,,!offer:1rpc-developer-recent-state,,,,,,,testnet,,,,,,,,,,,,,,,,
 alchemy-mainnet-free-recent-state,,!offer:alchemy-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 alchemy-testnet-free-recent-state,,!offer:alchemy-free-recent-state,,,,,,,testnet,,,,,,,,,,,,,,,,
+etherscan-api-mainnet-enterprise-full-archive,,!offer:etherscan-api-enterprise-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
 quicknode-mainnet-build-recent-state,,!offer:quicknode-build-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 quicknode-testnet-build-recent-state,,!offer:quicknode-build-recent-state,,,,,,,testnet,,,,,,,,,,,,,,,,
 tenderly-mainnet-free-recent-state,,!offer:tenderly-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,

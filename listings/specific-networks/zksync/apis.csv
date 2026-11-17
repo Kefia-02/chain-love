@@ -5,3 +5,4 @@ slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,techn
 1rpc-mainnet-starter-recent-state,,!offer:1rpc-starter-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 chainbase-mainnet-developer-custom,,!offer:chainbase-developer-custom,,,,,,,mainnet,,,,,,,,,,,,,,,,
 chainbase-mainnet-free-custom,,!offer:chainbase-free-custom,,,,,,,mainnet,,,,,,,,,,,,,,,,
+moralis-mainnet-indexer-enterprise,,!offer:moralis-indexer-enterprise,,,,,,,mainnet,,,,,,,,,,,,,,,,
