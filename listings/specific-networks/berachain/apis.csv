@@ -1,3 +1,4 @@
 slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,technology,chain,accessPrice,queryPrice,starred,trial,availableApis,limitations,securityImprovements,monitoringAndAnalytics,regions,additionalFeatures,address,tag,uptimeSla,blocksBehindSla,bandwidthSla,supportSla
 berachain-mainnet-public-rpc,,!offer:berachain-public-rpc,,,,,,,mainnet,,,,,,,,,,,,,,,,
 berachain-testnet-public-rpc,,!offer:berachain-public-rpc,,,,,,,testnet,,,,,,,,,,,,,,,,
+etherscan-api-mainnet-enterprise-full-archive,,!offer:etherscan-api-enterprise-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
