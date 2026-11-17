@@ -1,0 +1,4 @@
+slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,technology,chain,accessPrice,queryPrice,starred,trial,availableApis,limitations,securityImprovements,monitoringAndAnalytics,regions,additionalFeatures,address,tag,uptimeSla,blocksBehindSla,bandwidthSla,supportSla
+alchemy-mainnet-enterprise-full-archive,,!offer:alchemy-enterprise-full-archive,,,,,,,mainnet,,,,,"[""eth"",""web3"",""net"",""debug""]",,,,,,,,,,,
+alchemy-mainnet-enterprise-recent-state,,!offer:alchemy-enterprise-recent-state,,,,,,,mainnet,,,,,"[""eth"",""web3"",""net"",""debug""]",,,,,,,,,,,
+etherscan-api-mainnet-enterprise-full-archive,,!offer:etherscan-api-enterprise-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,

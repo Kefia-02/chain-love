@@ -1,4 +1,7 @@
 slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,technology,chain,accessPrice,queryPrice,starred,trial,availableApis,limitations,securityImprovements,monitoringAndAnalytics,regions,additionalFeatures,address,tag,uptimeSla,blocksBehindSla,bandwidthSla,supportSla
+alchemy-mainnet-enterprise-full-archive,,!offer:alchemy-enterprise-full-archive,,,,,,,mainnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace"",""nft"",""transfer"",""tokens""]",,,,,,,,,,,
+alchemy-mainnet-enterprise-recent-state,,!offer:alchemy-enterprise-recent-state,,,,,,,mainnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace"",""nft"",""transfer"",""tokens""]",,,,,,,,,,,
 alchemy-mainnet-free-recent-state,,!offer:alchemy-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 drpc-mainnet-free-recent-state,,!offer:drpc-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
+etherscan-api-mainnet-enterprise-full-archive,,!offer:etherscan-api-enterprise-full-archive,,,,,,,mainnet,,,,,,"[""Unmetered rate limits and usage"",""API support is scheduled to end on November 30, 2026.""]",,,,,,,,,,
 quicknode-mainnet-build-recent-state,,!offer:quicknode-build-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,

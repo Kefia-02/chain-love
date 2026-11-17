@@ -1,4 +1,6 @@
 slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,technology,chain,accessPrice,queryPrice,starred,trial,availableApis,limitations,securityImprovements,monitoringAndAnalytics,regions,additionalFeatures,address,tag,uptimeSla,blocksBehindSla,bandwidthSla,supportSla
+alchemy-mainnet-enterprise-full-archive,,!offer:alchemy-enterprise-full-archive,,,,,,,mainnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace""]",,,,,,,,,,,
+alchemy-mainnet-enterprise-recent-state,,!offer:alchemy-enterprise-recent-state,,,,,,,mainnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace""]",,,,,,,,,,,
 drpc-mainnet-free-recent-state,,!offer:drpc-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 tenderly-mainnet-free-recent-state,,!offer:tenderly-free-recent-state,"[""[Docs](https://docs.tenderly.co/node/rpc-reference/bob)""]",,,,,,mainnet,,,,,,,,,,,,,,,,
 tenderly-mainnet-pay-as-you-go-recent-state,,!offer:tenderly-pay-as-you-go-recent-state,"[""[Buy](https://tenderly.co/pricing)"",""[Docs](https://docs.tenderly.co/node/rpc-reference/bob)""]",,,,,,mainnet,,,,,,,,,,,,,,,,

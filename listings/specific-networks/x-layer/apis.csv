@@ -1,6 +1,10 @@
 slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,technology,chain,accessPrice,queryPrice,starred,trial,availableApis,limitations,securityImprovements,monitoringAndAnalytics,regions,additionalFeatures,address,tag,uptimeSla,blocksBehindSla,bandwidthSla,supportSla
 1rpc-testnet-developer-recent-state,,!offer:1rpc-developer-recent-state,,,,,,,testnet,,,,,,,,,,,,,,,,
+alchemy-mainnet-enterprise-full-archive,,!offer:alchemy-enterprise-full-archive,,,,,,,mainnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace""]",,,,,,,,,,,
+alchemy-mainnet-enterprise-recent-state,,!offer:alchemy-enterprise-recent-state,,,,,,,mainnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace""]",,,,,,,,,,,
 alchemy-mainnet-free-recent-state,,!offer:alchemy-free-recent-state,"[""[Website](https://www.alchemy.com/rpc/xlayer)""]",,,,,,mainnet,,,,,,,,,,,,,,,,
+alchemy-testnet-enterprise-full-archive,,!offer:alchemy-enterprise-full-archive,,,,,,,testnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace""]","[""custom limits"",""Testnet scope: X Layer Testnet.""]",,,,,,,,,,
+alchemy-testnet-enterprise-recent-state,,!offer:alchemy-enterprise-recent-state,,,,,,,testnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace""]","[""custom limits"",""Testnet scope: X Layer Testnet.""]",,,,,,,,,,
 ankr-mainnet-free-recent-state,,!offer:ankr-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 blockdaemon-mainnet-free-recent-state,,!offer:blockdaemon-free-recent-state,"[""[Docs](https://docs.blockdaemon.com/docs/access-xlayer-rpc)""]",,,,,,mainnet,,,,,,,,,,,,,,,,
 blockpi-mainnet-free-recent-state,,!offer:blockpi-free-recent-state,"[""[Website](https://blockpi.io/chain/xlayer)""]",,,,,,mainnet,,,,,,,,,,,,,,,,

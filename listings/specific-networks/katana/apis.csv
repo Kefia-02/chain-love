@@ -1,6 +1,12 @@
 slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,technology,chain,accessPrice,queryPrice,starred,trial,availableApis,limitations,securityImprovements,monitoringAndAnalytics,regions,additionalFeatures,address,tag,uptimeSla,blocksBehindSla,bandwidthSla,supportSla
+alchemy-bokuto-enterprise-full-archive,,!offer:alchemy-enterprise-full-archive,,,,,,,bokuto,,,,,"[""eth"",""web3"",""net"",""debug""]",,,,,,,,,,,
+alchemy-bokuto-enterprise-recent-state,,!offer:alchemy-enterprise-recent-state,,,,,,,bokuto,,,,,"[""eth"",""web3"",""net"",""debug""]",,,,,,,,,,,
+alchemy-mainnet-enterprise-full-archive,,!offer:alchemy-enterprise-full-archive,,,,,,,mainnet,,,,,"[""eth"",""web3"",""net"",""debug""]",,,,,,,,,,,
+alchemy-mainnet-enterprise-recent-state,,!offer:alchemy-enterprise-recent-state,,,,,,,mainnet,,,,,"[""eth"",""web3"",""net"",""debug""]",,,,,,,,,,,
 chainstack-mainnet-developer-recent-state,,!offer:chainstack-developer-recent-state,"[""[Website](https://chainstack.com/build-better-with-katana/)""]",,,,,,mainnet,,,,,,,,,,,,,,,,
 drpc-mainnet-public-recent-state,,!offer:drpc-public-recent-state,"[""[Access](https://drpc.org/chainlist/katana-mainnet-rpc)""]",,,,,,mainnet,,,,,,,,,,,,,,,,
+etherscan-api-bokuto-enterprise-full-archive,,!offer:etherscan-api-enterprise-full-archive,,,,,,,bokuto,,,,,,,,,,,,,,,,
+etherscan-api-mainnet-enterprise-full-archive,,!offer:etherscan-api-enterprise-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
 tenderly-free-recent-state,,!offer:tenderly-free-recent-state,"[""[Docs](https://docs.tenderly.co/node-rpc/rpc-reference)""]",,,,,,mainnet,,,,,,,,,,,,,,,,
 thegraph-mainnet-free-indexer,,!offer:thegraph-free-indexer,,,,,,,mainnet,,,,,,,,,,,,,,,,
 zerion-mainnet-builder-indexer,,!offer:zerion-builder-indexer,,,,,,,mainnet,,,,,,,,,,,,,,,,

@@ -4,3 +4,8 @@ slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,techn
 1rpc-mainnet-public-recent-state,,!offer:1rpc-public-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 1rpc-mainnet-starter-recent-state,,!offer:1rpc-starter-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 1rpc-testnet-developer-recent-state,,!offer:1rpc-developer-recent-state,,,,,,,testnet,,,,,,,,,,,,,,,,
+alchemy-mainnet-enterprise-full-archive,,!offer:alchemy-enterprise-full-archive,,,,,,,mainnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace"",""nft"",""transfer"",""tokens""]",,,,,,,,,,,
+alchemy-mainnet-enterprise-recent-state,,!offer:alchemy-enterprise-recent-state,,,,,,,mainnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace"",""nft"",""transfer"",""tokens""]",,,,,,,,,,,
+alchemy-testnet-enterprise-full-archive,,!offer:alchemy-enterprise-full-archive,,,,,,,testnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace""]","[""custom limits"",""Testnet scope: Tempo Moderato.""]",,,,,,,,,,
+alchemy-testnet-enterprise-recent-state,,!offer:alchemy-enterprise-recent-state,,,,,,,testnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace""]","[""custom limits"",""Testnet scope: Tempo Moderato.""]",,,,,,,,,,
+moralis-mainnet-indexer-enterprise,,!offer:moralis-indexer-enterprise,,,,,,,mainnet,,,,,,"[""Custom"",""Not supported: NFT trades, NFT prices, NFT floor prices.""]",,,,,,,,,,

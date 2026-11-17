@@ -1,7 +1,13 @@
 slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,technology,chain,accessPrice,queryPrice,starred,trial,availableApis,limitations,securityImprovements,monitoringAndAnalytics,regions,additionalFeatures,address,tag,uptimeSla,blocksBehindSla,bandwidthSla,supportSla
+alchemy-mainnet-enterprise-full-archive,,!offer:alchemy-enterprise-full-archive,,,,,,,mainnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace""]",,,,,,,,,,,
+alchemy-mainnet-enterprise-recent-state,,!offer:alchemy-enterprise-recent-state,,,,,,,mainnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace""]",,,,,,,,,,,
 alchemy-mainnet-free-recent-state,,!offer:alchemy-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
+alchemy-testnet-enterprise-full-archive,,!offer:alchemy-enterprise-full-archive,,,,,,,testnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace""]","[""custom limits"",""Testnet scope: Plasma Testnet.""]",,,,,,,,,,
+alchemy-testnet-enterprise-recent-state,,!offer:alchemy-enterprise-recent-state,,,,,,,testnet,,,,,"[""eth"",""web3"",""net"",""debug"",""trace""]","[""custom limits"",""Testnet scope: Plasma Testnet.""]",,,,,,,,,,
 chainstack-mainnet-developer-recent-state,,!offer:chainstack-developer-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 drpc-mainnet-free-recent-state,,!offer:drpc-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
+etherscan-api-mainnet-enterprise-full-archive,,!offer:etherscan-api-enterprise-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
+etherscan-api-testnet-enterprise-full-archive,,!offer:etherscan-api-enterprise-full-archive,,,,,,,testnet,,,,,,"[""Unmetered rate limits and usage"",""Testnet scope: Plasma Testnet.""]",,,,,,,,,,
 quicknode-mainnet-build-recent-state,,!offer:quicknode-build-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 tenderly-mainnet-free-recent-state,,!offer:tenderly-free-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 thirdweb-mainnet-starter-recent-state,,!offer:thirdweb-starter-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
