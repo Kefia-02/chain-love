@@ -234,7 +234,7 @@ mobula-one-pay-as-you-go-indexer,,!offer:mobula-pay-as-you-go-indexer,"[""[Buy](
 moralis-one-business-full-archive,,!offer:moralis-business-full-archive,,,,,,,one,,,,,,,,,,,,,,,,
 moralis-one-free-full-archive,,!offer:moralis-free-full-archive,,,,,,,one,,,,,,,,,,,,,,,,
 moralis-one-indexer-business,,!offer:moralis-indexer-business,,,,,,,one,,,,,,,,,,,,,,,,
-moralis-one-indexer-enterprise,,!offer:moralis-indexer-enterprise,,,,,,,one,,,,,,,,,,,,,,,,
+moralis-one-indexer-enterprise,,!offer:moralis-indexer-enterprise,,,,,,,one,,,,,"[""wallet api"",""nft api"",""blockchain api"",""price api"",""streams api""]",,,,,,,,,,,
 moralis-one-indexer-free,,!offer:moralis-indexer-free,,,,,,,one,,,,,,,,,,,,,,,,
 moralis-one-indexer-pro,,!offer:moralis-indexer-pro,,,,,,,one,,,,,,,,,,,,,,,,
 moralis-one-indexer-starter,,!offer:moralis-indexer-starter,,,,,,,one,,,,,,,,,,,,,,,,

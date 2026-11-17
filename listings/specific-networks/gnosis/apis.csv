@@ -26,7 +26,7 @@ getblock-mainnet-pro-full-archive,,!offer:getblock-pro-full-archive,,,,,,,mainne
 getblock-mainnet-pro-recent-state,,!offer:getblock-pro-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 getblock-mainnet-starter-full-archive,,!offer:getblock-starter-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
 getblock-mainnet-starter-recent-state,,!offer:getblock-starter-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
-moralis-mainnet-indexer-enterprise,,!offer:moralis-indexer-enterprise,,,,,,,mainnet,,,,,,,,,,,,,,,,
+moralis-mainnet-indexer-enterprise,,!offer:moralis-indexer-enterprise,,,,,,,mainnet,,,,,"[""wallet api"",""blockchain api"",""price api"",""streams api""]","[""Custom"",""Not supported: NFT API, NFT trades, NFT prices, NFT floor prices.""]",,,,,,,,,,
 quicknode-mainnet-accelerate-full-archive,,!offer:quicknode-accelerate-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
 quicknode-mainnet-accelerate-recent-state,,!offer:quicknode-accelerate-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 quicknode-mainnet-build-full-archive,,!offer:quicknode-build-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,

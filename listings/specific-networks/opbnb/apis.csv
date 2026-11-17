@@ -4,4 +4,3 @@ slug,provider,offer,actionButtons,planName,planType,historicalData,apiType,techn
 1rpc-mainnet-public-recent-state,,!offer:1rpc-public-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 1rpc-mainnet-starter-recent-state,,!offer:1rpc-starter-recent-state,,,,,,,mainnet,,,,,,,,,,,,,,,,
 etherscan-api-mainnet-enterprise-full-archive,,!offer:etherscan-api-enterprise-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
-moralis-mainnet-indexer-enterprise,,!offer:moralis-indexer-enterprise,,,,,,,mainnet,,,,,,,,,,,,,,,,

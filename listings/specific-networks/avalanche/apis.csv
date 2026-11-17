@@ -150,7 +150,7 @@ mobula-mainnet-pay-as-you-go-indexer,,!offer:mobula-pay-as-you-go-indexer,"[""[P
 moralis-mainnet-business-full-archive,,!offer:moralis-business-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
 moralis-mainnet-enterprise-full-archive,,!offer:moralis-enterprise-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
 moralis-mainnet-free-full-archive,,!offer:moralis-free-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
-moralis-mainnet-indexer-enterprise,,!offer:moralis-indexer-enterprise,,,,,,,mainnet,,,,,,,,,,,,,,,,
+moralis-mainnet-indexer-enterprise,,!offer:moralis-indexer-enterprise,,,,,,,mainnet,,,,,"[""wallet api"",""nft api"",""blockchain api"",""price api"",""streams api""]",,,,,,,,,,,
 moralis-mainnet-pro-full-archive,,!offer:moralis-pro-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
 moralis-mainnet-starter-full-archive,,!offer:moralis-starter-full-archive,,,,,,,mainnet,,,,,,,,,,,,,,,,
 node-real-mainnet-business-recent-state,,!offer:node-real-business-recent-state,"[""[Buy](https://nodereal.io/pricing)"",""[Docs](https://docs.nodereal.io/reference/avalanche-c-chain-avax)""]",,,,,,mainnet,,,,,,,,,,,,,,,,
