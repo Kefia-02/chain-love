@@ -1,5 +1,6 @@
 slug,provider,offer,actionButtons,openSource,supportedPlatforms,custodial,mfa,msig,hardware,keyExport,native,evm,tendermint,tokensSupport,staking,price,support,audit,languages,starred,tag
 alphawallet,,!offer:alphawallet,,,,,,,,,,,,,,,,,,,
+avocado-wallet,,!offer:avocado-wallet,"[""[Website](https://instadapp.io/product/avocado)"",""[Fuse Contracts](https://docs.avocado.instadapp.io/contracts/contract-addresses.html/)""]",,,,,,,,,,,,,,,,,,
 frontier,,!offer:frontier,,,,,,,,,,,,,,,,,,,
 metamask,,!offer:metamask,,,,,,,,,,,,,,,,,,,
 rabby,,!offer:rabby,,,,,,,,,,,,,,,,,,,
