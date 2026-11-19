@@ -682,6 +682,44 @@ def collect_provider_categories(
     return mapping
 
 
+def scoped_global_chains(network_dir: str, chains: list[str]) -> list[str]:
+    """Restrict global chain-aware listings where support for a chain is unverified.
+
+    By default, preserve the existing expansion to all locally discovered chains.
+    A network can opt into a conservative allowlist through
+    listings/specific-networks/<network>/global-chain-scope.json, e.g.
+    {"chains": ["mainnet", "testnet"]}. Network-specific rows are unaffected.
+    """
+    path = os.path.join(network_dir, "global-chain-scope.json")
+    if not os.path.exists(path):
+        return chains
+
+    with open(path, "r", encoding="utf-8") as file:
+        config = json.load(file)
+
+    if not isinstance(config, dict) or set(config) != {"chains"}:
+        raise ValueError(f"{path}: expected an object with only a 'chains' list")
+
+    allowed = config["chains"]
+    if (
+        not isinstance(allowed, list)
+        or any(
+            not isinstance(chain, str)
+            or not chain
+            or chain != chain.strip().lower()
+            for chain in allowed
+        )
+        or len(allowed) != len(set(allowed))
+    ):
+        raise ValueError(f"{path}: chains must be unique lowercase chain names")
+
+    unknown = set(allowed) - set(chains)
+    if unknown:
+        raise ValueError(f"{path}: undeclared network chains: {sorted(unknown)}")
+
+    return [chain for chain in chains if chain in set(allowed)]
+
+
 def main():
     base_dir = "listings"
     all_networks_dir = os.path.join(base_dir, "all-networks")
@@ -724,6 +762,7 @@ def main():
                 chains.update([entity['chain'].lower()])
 
         chains = sorted(chains)
+        global_chains = scoped_global_chains(network_dir, chains)
 
         for category, entities in global_listings.items():
             rows = list(entities)
@@ -742,7 +781,7 @@ def main():
                         "chain": chain,
                         "slug": f"{entity['slug']}-{chain}".lower(),
                     }
-                    for chain in chains
+                    for chain in global_chains
                     for entity in entities
                 ]
                 rows = chain_aware_entities
