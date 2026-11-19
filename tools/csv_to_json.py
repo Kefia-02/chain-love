@@ -717,7 +717,21 @@ def scoped_global_chains(network_dir: str, chains: list[str]) -> list[str]:
     if unknown:
         raise ValueError(f"{path}: undeclared network chains: {sorted(unknown)}")
 
-    return [chain for chain in chains if chain in set(allowed)]
+    allowed_set = set(allowed)
+    return [chain for chain in chains if chain in allowed_set]
+
+
+def expand_global_chain_rows(entities: list[dict], chains: list[str]) -> list[dict]:
+    """Hydrate global chain-aware listing rows only onto approved chains."""
+    return [
+        {
+            **entity,
+            "chain": chain,
+            "slug": f"{entity['slug']}-{chain}".lower(),
+        }
+        for chain in chains
+        for entity in entities
+    ]
 
 
 def main():
@@ -775,16 +789,7 @@ def main():
                     )
                     continue
 
-                chain_aware_entities = [
-                    {
-                        **entity,
-                        "chain": chain,
-                        "slug": f"{entity['slug']}-{chain}".lower(),
-                    }
-                    for chain in global_chains
-                    for entity in entities
-                ]
-                rows = chain_aware_entities
+                rows = expand_global_chain_rows(entities, global_chains)
 
             validate_no_offer_reference_conflicts(
                 category,
