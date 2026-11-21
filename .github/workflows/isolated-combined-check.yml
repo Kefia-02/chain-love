@@ -1,0 +1,74 @@
+name: Isolated ChainLove combined regression
+on:
+  push:
+    branches:
+      - verify/chainlove-combined-20261121
+permissions:
+  contents: read
+jobs:
+  validate-combined-betanet-change:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout json-tools PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/global-chain-scope-clean-20261120
+          fetch-depth: 1
+      - name: Verify generator revision and overlay BetaNet data PR
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "ee7c039044c1b18ec585c7fc8f0e0f12df097dde"
+          git fetch --depth=1 origin data/algorand-betanet-faucet-inherit-20261117
+          git checkout FETCH_HEAD -- listings/README.md \
+            listings/specific-networks/algorand/faucets.csv \
+            listings/specific-networks/algorand/global-chain-scope.json \
+            listings/specific-networks/algorand/betanet.png \
+            references/offers/faucets.csv
+          git diff --stat
+      - name: Install Python validation dependencies
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install schema validation libraries
+        run: python -m pip install -r tools/requirements.txt
+      - name: Run official generator and validators
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/test_global_chain_scope.py
+          python tools/validate_csv.py
+          python tools/csv_to_json.py
+          python tools/validate.py
+      - name: Verify complete generated Algorand effective rows
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv
+          import json
+          from pathlib import Path
+
+          network = json.loads(Path('json/algorand.json').read_text())
+          blocked = 0
+          retained = 0
+          for category in ('apis', 'analytics'):
+              with open(f'listings/all-networks/{category}.csv', newline='') as stream:
+                  slugs = [r['slug'] for r in csv.DictReader(stream)]
+              observed = {row['slug'] for row in network[category]}
+              for slug in slugs:
+                  assert f'{slug}-betanet' not in observed, (category, slug)
+                  assert f'{slug}-mainnet' in observed, (category, slug)
+                  assert f'{slug}-testnet' in observed, (category, slug)
+                  blocked += 1
+                  retained += 2
+          rows = [r for r in network['faucets'] if r['slug'] == 'algorand-betanet-dispenser-algo']
+          assert len(rows) == 1
+          faucet = rows[0]
+          assert faucet['chain'] == 'betanet', faucet
+          assert faucet.get('dripLimitPeriod') is None, faucet
+          assert faucet.get('requiresLogin') is False, faucet
+          assert blocked == 67 and retained == 134
+          print(f'PASS: {blocked} invalid BetaNet globals blocked, {retained} mainnet/testnet globals retained, native faucet preserved')
+          PY
