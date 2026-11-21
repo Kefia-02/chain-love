@@ -10,38 +10,46 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Checkout json-tools PR branch
+      - name: Checkout data PR exactly
         uses: actions/checkout@v4
         with:
+          ref: data/algorand-betanet-faucet-inherit-20261117
+          persist-credentials: false
+      - name: Verify data branch revision
+        shell: bash
+        run: test "$(git rev-parse HEAD)" = "e89f07891e0e9585f71d9b0bf24152a056513abe"
+      - name: Checkout generator PR into isolated tools directory
+        uses: actions/checkout@v4
+        with:
+          repository: Kefia-02/chain-love
           ref: fix/global-chain-scope-clean-20261120
-          fetch-depth: 1
-      - name: Verify generator revision and overlay BetaNet data PR
+          path: json-tools
+          persist-credentials: false
+      - name: Verify tools branch and assemble official generator layout
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "ee7c039044c1b18ec585c7fc8f0e0f12df097dde"
-          git fetch --depth=1 origin data/algorand-betanet-faucet-inherit-20261117
-          git checkout FETCH_HEAD -- listings/README.md \
-            listings/specific-networks/algorand/faucets.csv \
-            listings/specific-networks/algorand/global-chain-scope.json \
-            listings/specific-networks/algorand/betanet.png \
-            references/offers/faucets.csv
-          git diff --stat
-      - name: Install Python validation dependencies
+          test "$(git -C json-tools rev-parse HEAD)" = "ee7c039044c1b18ec585c7fc8f0e0f12df097dde"
+          cp json-tools/tools/csv_to_json.py .
+          cp json-tools/tools/validate.py .
+          cp json-tools/tools/validate_csv.py .
+          cp json-tools/tools/schema.json .
+          cp -r json-tools/meta .
+      - name: Install Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - name: Install schema validation libraries
-        run: python -m pip install -r tools/requirements.txt
-      - name: Run official generator and validators
+        run: python -m pip install -r json-tools/tools/requirements.txt
+      - name: Run official generator and validators against combined source
         shell: bash
         run: |
           set -euo pipefail
-          python tools/test_global_chain_scope.py
-          python tools/validate_csv.py
-          python tools/csv_to_json.py
-          python tools/validate.py
-      - name: Verify complete generated Algorand effective rows
+          python json-tools/tools/test_global_chain_scope.py
+          python validate_csv.py
+          python csv_to_json.py
+          python validate.py
+      - name: Verify generated Algorand effective rows
         shell: bash
         run: |
           set -euo pipefail
@@ -49,13 +57,11 @@ jobs:
           import csv
           import json
           from pathlib import Path
-
           network = json.loads(Path('json/algorand.json').read_text())
-          blocked = 0
-          retained = 0
+          blocked = retained = 0
           for category in ('apis', 'analytics'):
               with open(f'listings/all-networks/{category}.csv', newline='') as stream:
-                  slugs = [r['slug'] for r in csv.DictReader(stream)]
+                  slugs = [row['slug'] for row in csv.DictReader(stream)]
               observed = {row['slug'] for row in network[category]}
               for slug in slugs:
                   assert f'{slug}-betanet' not in observed, (category, slug)
@@ -65,10 +71,9 @@ jobs:
                   retained += 2
           rows = [r for r in network['faucets'] if r['slug'] == 'algorand-betanet-dispenser-algo']
           assert len(rows) == 1
-          faucet = rows[0]
-          assert faucet['chain'] == 'betanet', faucet
-          assert faucet.get('dripLimitPeriod') is None, faucet
-          assert faucet.get('requiresLogin') is False, faucet
+          assert rows[0]['chain'] == 'betanet'
+          assert rows[0].get('dripLimitPeriod') is None, rows[0]
+          assert rows[0].get('requiresLogin') is False
           assert blocked == 67 and retained == 134
-          print(f'PASS: {blocked} invalid BetaNet globals blocked, {retained} mainnet/testnet globals retained, native faucet preserved')
+          print(f'PASS: {blocked} BetaNet global listings blocked and {retained} supported mainnet/testnet listings retained')
           PY
