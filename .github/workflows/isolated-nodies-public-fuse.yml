@@ -1,0 +1,28 @@
+name: Verify public Nodies Fuse RPC (not paid tier)
+on:
+  push:
+    branches:
+      - verify/fuse-nodies-public-20261121
+permissions:
+  contents: read
+jobs:
+  read-only-public-rpc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Test documented public Fuse endpoint with a read-only method
+        shell: bash
+        run: |
+          set -euo pipefail
+          payload='{"jsonrpc":"2.0","id":1,"method":"eth_chainId","params":[]}'
+          for i in 1 2 3; do
+            response=$(curl --max-time 15 --silent --show-error --fail-with-body -H 'Content-Type: application/json' -d "$payload" 'https://fuse-pokt.nodies.app/' || true)
+            echo "attempt $i: $response"
+            if echo "$response" | python3 -c 'import json,sys; data=json.load(sys.stdin); assert int(data["result"],16)==122'; then
+              echo 'PASS: documented free public Nodies endpoint responds with Fuse chain ID 122'
+              exit 0
+            fi
+            sleep 2
+          done
+          echo 'Public read-only Fuse endpoint could not be verified (not evidence of paid workspace behavior).'
+          exit 1
